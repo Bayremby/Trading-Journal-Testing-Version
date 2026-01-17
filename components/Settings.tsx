@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserSettings, ThemeMode } from '../types';
 import { Button } from './Button';
-import { Plus, Trash2, Sun, Moon } from 'lucide-react';
+import { Plus, Trash2, Sun, Moon, LogOut } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 interface SettingsProps {
   settings: UserSettings;
@@ -10,9 +12,16 @@ interface SettingsProps {
 }
 
 export const Settings: React.FC<SettingsProps> = ({ settings, onSave }) => {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [localSettings, setLocalSettings] = useState<UserSettings>(settings);
   const [newPair, setNewPair] = useState('');
   const [newSession, setNewSession] = useState('');
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/landing');
+  };
 
   const handleAddPair = () => {
     if (!newPair.trim() || localSettings.pairs.includes(newPair.toUpperCase())) return;
@@ -145,6 +154,28 @@ export const Settings: React.FC<SettingsProps> = ({ settings, onSave }) => {
 
         <div className="pt-8 border-t border-gray-50 dark:border-white/[0.03] text-center">
           <p className="text-xs text-gray-300 dark:text-gray-800 italic">"Discipline is doing what needs to be done, even if you don't want to do it."</p>
+        </div>
+
+        {/* Account Section */}
+        <div className="pt-8 border-t border-gray-50 dark:border-white/[0.03]">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-widest mb-4">Account</h3>
+          {user && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-[#0a0a0a] rounded-xl border border-gray-100 dark:border-white/5">
+                <div>
+                  <p className="text-xs text-gray-400 dark:text-gray-600 uppercase tracking-wider mb-1">Signed in as</p>
+                  <p className="text-sm font-bold text-black dark:text-white">{user.email}</p>
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-3 py-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 rounded-xl text-rose-600 dark:text-rose-400 font-bold text-sm hover:bg-rose-100 dark:hover:bg-rose-500/20 transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>
