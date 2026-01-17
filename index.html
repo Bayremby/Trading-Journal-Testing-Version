@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silence Journal — Minimalist ICT Trading Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f3f5;
+            color: #1a1a1a;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .dark body {
+          background-color: #050505;
+          color: #f8fafc;
+        }
+
+        /* Performance: contain paint for modal overlays */
+        .fixed {
+          contain: layout style;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 20px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #262626;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        .soft-shadow {
+          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Minimalist Animations - GPU accelerated */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+          from { opacity: 0; transform: scale(0.97); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(12px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fade-in { 
+          animation: fadeIn 0.3s ease-out forwards;
+          will-change: opacity;
+        }
+        .animate-slide-up { 
+          animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          will-change: transform, opacity;
+        }
+        .animate-scale-in { 
+          animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          will-change: transform, opacity;
+        }
+        .animate-slide-right { 
+          animation: slideInRight 0.3s ease-out forwards;
+          will-change: transform, opacity;
+        }
+
+        .stagger-1 { animation-delay: 0.02s; }
+        .stagger-2 { animation-delay: 0.04s; }
+        .stagger-3 { animation-delay: 0.06s; }
+        
+        /* Global smooth transitions - optimized for GPU */
+        button, a, input, textarea, select, [role="button"] {
+          transition-property: background-color, border-color, color, box-shadow, transform;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 150ms;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="overflow-x-hidden">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
