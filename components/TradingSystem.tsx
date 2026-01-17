@@ -1,8 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { UserSettings, Rule, Criterion, TradingSystemModel, Trade } from '../types';
-import { Plus, Trash2, CheckCircle2, Circle, HelpCircle, ListTodo, Layers, X, Edit3, ArrowRight, AlertCircle, BookOpen, Cpu } from 'lucide-react';
-import { AISystemIntelligence } from './AISystemIntelligence';
+import { Plus, Trash2, CheckCircle2, Circle, HelpCircle, ListTodo, Layers, X, Edit3, ArrowRight, AlertCircle, BookOpen } from 'lucide-react';
 
 interface TradingSystemProps {
   settings: UserSettings;
@@ -14,7 +13,6 @@ export const TradingSystem: React.FC<TradingSystemProps> = ({ settings, onSave, 
   const [activeSystemId, setActiveSystemId] = useState(settings.systems[0]?.id || '');
   const [newRule, setNewRule] = useState('');
   const [showBuilder, setShowBuilder] = useState(false);
-  const [showAIIntelligence, setShowAIIntelligence] = useState(false);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isCreatingNewSystem, setIsCreatingNewSystem] = useState(false);
   const [newSystemName, setNewSystemName] = useState('');
@@ -176,18 +174,6 @@ export const TradingSystem: React.FC<TradingSystemProps> = ({ settings, onSave, 
           <div className="animate-fade-in space-y-12">
             <header className="flex items-center justify-between">
               <div className="flex items-center gap-3 group">
-                {/* AI Intelligence Toggle Button */}
-                <button
-                  onClick={() => setShowAIIntelligence(!showAIIntelligence)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all ${
-                    showAIIntelligence
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20'
-                      : 'bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-500 hover:text-black dark:hover:text-white'
-                  }`}
-                >
-                  <Cpu className="w-4 h-4" />
-                  AI Intelligence
-                </button>
               </div>
               <div className="flex items-center gap-3 group">
                 {isEditingName ? (
@@ -221,13 +207,6 @@ export const TradingSystem: React.FC<TradingSystemProps> = ({ settings, onSave, 
                 </button>
               )}
             </header>
-
-            {/* AI System Intelligence Panel */}
-            {showAIIntelligence && (
-              <div className="animate-fade-in">
-                <AISystemIntelligence trades={trades} system={activeSystem} />
-              </div>
-            )}
 
             {/* Strategy Rules Section */}
             <section className="space-y-4 animate-slide-up stagger-1">
